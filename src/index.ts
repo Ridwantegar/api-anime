@@ -6,10 +6,15 @@ import otakudesuRouter from "@routes/otakudesu.routes.js";
 import samehadakuRouter from "@routes/samehadaku.routes.js";
 import kuramanimeRouter from "@routes/kuramanime.routes.js";
 import setPayload from "@helpers/setPayload.js";
+import cors from "cors";
 
 const { PORT } = appConfig;
 const app = express();
-
+app.use(cors({
+  origin: "*",                    // izinkan semua domain
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+}));
 app.use(clientCache(1));
 
 app.get("/", (req, res) => {
