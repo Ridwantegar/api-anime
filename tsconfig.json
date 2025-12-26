@@ -1,29 +1,39 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
-    "module": "CommonJS",
-    "lib": ["ES2021"],
-    "outDir": "dist",
     "rootDir": "./src",
+    "outDir": "./dist",
+
+    "module": "nodenext",
+    "target": "esnext",
+
+    "lib": ["esnext"],
+    "types": ["node"],
+
     "strict": true,
-    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
     "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "removeComments": true,
-    "moduleResolution": "Node",
-    "baseUrl": "./src",
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+
     "paths": {
-      "@otakudesu/*": ["anims/otakudesu/*"],
-      "@samehadaku/*": ["anims/samehadaku/*"],
-      "@configs/*": ["configs/*"],
-      "@controllers/*": ["controllers/*"],
-      "@helpers/*": ["helpers/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@libs/*": ["libs/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@routes/*": ["routes/*"],
-      "@scrapers/*": ["scrapers/*"],
-      "@services/*": ["services/*"]
+      "@configs/*": ["./src/configs/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@parsers/*": ["./src/parsers/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@schemas/*": ["./src/schemas/*"],
+      "@scrapers/*": ["./src/scrapers/*"],
+
+      /* Tambahan khusus CIHUYNIME */
+      "@cihuynime/parsers/*": ["./src/parsers/cihuynime/*"],
+      "@cihuynime/scrapers/*": ["./src/scrapers/cihuynime/*"],
+      "@cihuynime/interfaces/*": ["./src/interfaces/cihuynime/*"]
     }
   },
   "include": ["src/**/*"],
