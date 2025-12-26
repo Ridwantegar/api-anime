@@ -5,36 +5,33 @@ const { baseUrl } = otakudesuConfig;
 const otakudesuScraper = {
     async scrapeDOM(pathname, ref, sanitize = false) {
         const html = await getHTML(baseUrl, pathname, ref, sanitize);
-        const document = parse(html, {
-            parseNoneClosedTags: true,
-        });
-        return document;
+        return parse(html, { parseNoneClosedTags: true });
     },
     async scrapeNonce(body, referer) {
-        const nonceResponse = await fetch(new URL("/wp-admin/admin-ajax.php", baseUrl), {
+        const res = await fetch(new URL("/wp-admin/admin-ajax.php", baseUrl), {
             method: "POST",
             body,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-                Referer: referer,
-                Origin: baseUrl,
-            },
+                "Referer": referer,
+                "Origin": baseUrl
+            }
         });
-        const nonce = (await nonceResponse.json());
-        return nonce;
+        const json = (await res.json());
+        return json;
     },
     async scrapeServer(body, referer) {
-        const serverResponse = await fetch(new URL("/wp-admin/admin-ajax.php", baseUrl), {
+        const res = await fetch(new URL("/wp-admin/admin-ajax.php", baseUrl), {
             method: "POST",
             body,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-                Origin: baseUrl,
-                Referer: referer,
-            },
+                "Origin": baseUrl,
+                "Referer": referer
+            }
         });
-        const server = (await serverResponse.json());
-        return server;
-    },
+        const json = (await res.json());
+        return json;
+    }
 };
 export default otakudesuScraper;
