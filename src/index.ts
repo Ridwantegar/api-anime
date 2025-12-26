@@ -10,15 +10,20 @@ import cors from "cors";
 
 const { PORT } = appConfig;
 const app = express();
+
+// WAJIB paling awal
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");        // Izinkan semua domain
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") return res.sendStatus(200);
   next();
 });
-app.use(cors({ origin: "*" }));
+
+app.use(cors());
 app.use(express.json());
 app.use(clientCache(1));
+
 
 app.get("/", (req, res) => {
   const routes: IRouteData[] = [
