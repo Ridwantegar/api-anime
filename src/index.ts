@@ -10,11 +10,14 @@ import cors from "cors";
 
 const { PORT } = appConfig;
 const app = express();
-app.use(cors({
-  origin: "*",                    // izinkan semua domain
-  methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type,Authorization"
-}));
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");        // Izinkan semua domain
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+app.use(cors({ origin: "*" }));
+app.use(express.json());
 app.use(clientCache(1));
 
 app.get("/", (req, res) => {
